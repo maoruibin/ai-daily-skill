@@ -271,13 +271,27 @@ python src/main.py
 
 ---
 
-## 更新日志
+## 版本发布
 
-### v1.0.0 (2026-01-15)
+本项目使用语义化版本号（Semantic Versioning），遵循 [Keep a Changelog](https://keepachangelog.com/) 规范。
 
-- 初始版本发布
-- 支持 smol.ai RSS 源
-- 8 种智能主题
-- Claude AI 分析
-- 邮件通知
-- GitHub Actions 自动部署
+### 查看更新日志
+
+完整的版本更新记录请查看 [CHANGELOG.md](CHANGELOG.md)。
+
+### 当前版本
+
+- 最新稳定版：[v1.0.0](https://github.com/geekjourneyx/ai-daily-skill/releases/tag/v1.0.0)
+
+### 发布流程
+
+每次代码更新后，按以下步骤发布新版本：
+
+1. 更新 `CHANGELOG.md` 中的 `[Unreleased]` 部分
+2. 提交代码并推送到 main 分支
+3. 创建并推送 tag：
+   ```bash
+   git tag v1.0.0
+   git push origin v1.0.0
+   ```
+4. 在 GitHub Releases 页面创建 Release，填写发布说明
