@@ -27,10 +27,10 @@ def print_banner():
     banner = """
 ╔════════════════════════════════════════════════════════════╗
 ║                                                              ║
-║   🤖 AI Daily - AI 资讯日报自动生成器                       ║
+║   AI Daily - AI 资讯日报自动生成器                          ║
 ║                                                              ║
 ║   自动获取 smol.ai 资讯 · Claude 智能分析                   ║
-║   精美 HTML 页面 · 邮件通知                                 ║
+║   精美 HTML 页面 · 自动部署                                 ║
 ║                                                              ║
 ╚════════════════════════════════════════════════════════════╝
 """
@@ -63,16 +63,18 @@ def main():
 
     # 初始化组件
     notifier = EmailNotifier()
+    email_enabled = notifier._is_configured()
+    total_steps = 5 if email_enabled else 4
 
     try:
         # 1. 计算目标日期 (今天 - 2天)
         target_date = get_target_date(days_offset=2)
-        print(f"🎯 目标日期: {target_date}")
+        print(f"[目标日期] {target_date}")
         print(f"   (北京时间: {datetime.now(timezone.utc) + timedelta(hours=8)} + 8h)")
         print()
 
         # 2. 下载并解析 RSS
-        print("📥 [步骤 1/5] 正在下载 RSS...")
+        print(f"[步骤 1/{total_steps}] 下载 RSS...")
         fetcher = RSSFetcher()
         rss_data = fetcher.fetch()
 
@@ -83,16 +85,17 @@ def main():
         print()
 
         # 3. 查找目标日期的内容
-        print("🔍 [步骤 2/5] 正在查找目标日期的资讯...")
+        print(f"[步骤 2/{total_steps}] 查找目标日期的资讯...")
         content = fetcher.get_content_by_date(target_date, rss_data)
 
         if not content:
-            print("📭 目标日期无内容，生成空页面")
-            notifier.send_empty(
-                target_date,
-                f"RSS 中未找到 {target_date} 的资讯内容。"
-                f"RSS 可用日期范围: {date_range[0]} ~ {date_range[1]}"
-            )
+            print("   目标日期无内容，生成空页面")
+            if email_enabled:
+                notifier.send_empty(
+                    target_date,
+                    f"RSS 中未找到 {target_date} 的资讯内容。"
+                    f"RSS 可用日期范围: {date_range[0]} ~ {date_range[1]}"
+                )
 
             # 生成空页面
             generator = HTMLGenerator()
@@ -100,27 +103,28 @@ def main():
             generator.generate_empty(target_date)
             generator.update_index(target_date, {"summary": ["暂无资讯"]})
 
-            print("✅ 完成")
+            print("   完成")
             return
 
-        print(f"✅ 找到资讯: {content.get('title', '')[:60]}...")
+        print(f"   找到资讯: {content.get('title', '')[:60]}...")
         print()
 
         # 4. 调用 Claude 分析
-        print("🤖 [步骤 3/5] 正在调用 Claude 进行智能分析...")
+        print(f"[步骤 3/{total_steps}] 调用 Claude 进行智能分析...")
         analyzer = ClaudeAnalyzer()
         result = analyzer.analyze(content, target_date)
 
         # 检查分析状态
         if result.get("status") == "empty":
-            print("📭 分析结果为空")
-            notifier.send_empty(target_date, result.get("reason", "内容分析为空"))
+            print("   分析结果为空")
+            if email_enabled:
+                notifier.send_empty(target_date, result.get("reason", "内容分析为空"))
             return
 
         print()
 
         # 5. 生成 HTML
-        print("📄 [步骤 4/5] 正在生成 HTML 页面...")
+        print(f"[步骤 4/{total_steps}] 生成 HTML 页面...")
         generator = HTMLGenerator()
         generator.generate_css()
 
@@ -129,17 +133,21 @@ def main():
         print(f"   文件路径: {html_path}")
         print()
 
-        # 6. 发送成功通知
-        print("📧 [步骤 5/5] 发送邮件通知...")
+        # 6. 发送成功通知（可选）
+        if email_enabled:
+            print(f"[步骤 5/{total_steps}] 发送邮件通知...")
 
-        # 计算总资讯数
-        total_items = sum(
-            len(cat.get('items', []))
-            for cat in result.get('categories', [])
-        )
+            # 计算总资讯数
+            total_items = sum(
+                len(cat.get('items', []))
+                for cat in result.get('categories', [])
+            )
 
-        notifier.send_success(target_date, total_items)
-        print()
+            notifier.send_success(target_date, total_items)
+            print()
+        else:
+            print("   (邮件通知未配置，跳过)")
+            print()
 
         # 完成
         print("╔════════════════════════════════════════════════════════════╗")
@@ -157,16 +165,17 @@ def main():
         sys.exit(130)
 
     except Exception as e:
-        print(f"\n❌ 执行过程出错: {e}")
+        print(f"\n[错误] 执行过程出错: {e}")
         import traceback
         traceback.print_exc()
 
-        # 发送错误通知
-        try:
-            target_date = get_target_date(days_offset=2)
-            notifier.send_error(target_date, str(e))
-        except:
-            pass
+        # 发送错误通知（如果配置了邮件）
+        if email_enabled:
+            try:
+                target_date = get_target_date(days_offset=2)
+                notifier.send_error(target_date, str(e))
+            except:
+                pass
 
         sys.exit(1)
 

@@ -31,7 +31,7 @@ AI Daily 是一个自动化工具，帮助 AI 从业者每天快速获取行业�
 你只需要：
 - 一个 GitHub 账号
 - 一个智谱 AI API Key（用于调用 Claude）
-- 一个邮箱（用于接收通知）
+- 邮箱（可选，用于接收通知）
 
 ### 三步即可使用
 
@@ -43,15 +43,17 @@ AI Daily 是一个自动化工具，帮助 AI 从业者每天快速获取行业�
 
 在仓库页面进入 `Settings` -> `Secrets and variables` -> `Actions`，点击 `New repository secret` 添加以下配置：
 
-| Secret 名称 | 填写内容 | 获取方式 |
-|-------------|----------|----------|
-| `ZHIPU_API_KEY` | 你的智谱 API Key | [智谱AI开放平台](https://open.bigmodel.cn/) |
-| `ANTHROPIC_BASE_URL` | `https://open.bigmodel.cn/api/anthropic` | 固定值 |
-| `SMTP_HOST` | `smtp.gmail.com`（或其他邮箱服务器） | 见下方邮箱配置说明 |
-| `SMTP_PORT` | `587`（或其他端口） | 见下方邮箱配置说明 |
-| `SMTP_USER` | 你的邮箱地址 | |
-| `SMTP_PASSWORD` | 邮箱授权码（非登录密码） | 见下方邮箱配置说明 |
-| `NOTIFICATION_TO` | 接收通知的邮箱地址 | |
+| Secret 名称 | 是否必须 | 填写内容 | 获取方式 |
+|-------------|----------|----------|----------|
+| `ZHIPU_API_KEY` | 是 | 你的智谱 API Key | [智谱AI开放平台](https://open.bigmodel.cn/) |
+| `ANTHROPIC_BASE_URL` | 是 | `https://open.bigmodel.cn/api/anthropic` | 固定值 |
+| `SMTP_HOST` | 否 | `smtp.gmail.com`（或其他邮箱服务器） | 见下方邮箱配置说明 |
+| `SMTP_PORT` | 否 | `587`（或其他端口） | 见下方邮箱配置说明 |
+| `SMTP_USER` | 否 | 你的邮箱地址 | |
+| `SMTP_PASSWORD` | 否 | 邮箱授权码（非登录密码） | 见下方邮箱配置说明 |
+| `NOTIFICATION_TO` | 否 | 接收通知的邮箱地址 | |
+
+> 注意：邮件相关配置为可选项，如果不配置则跳过邮件通知，日报仍会正常生成。
 
 **第三步：启用 GitHub Pages**
 
@@ -84,7 +86,7 @@ A: 不同邮箱的配置方式如下：
 
 **Q: 我不想配置邮箱通知，可以跳过吗？**
 
-A: 可以。不配置邮箱相关的 Secrets 会导致程序报错，但日报仍会正常生成。你可以修改代码跳过邮件发送。
+A: 可以。邮件通知是可选项，不配置邮箱相关的 Secrets 也不会报错，日报仍会正常生成，只是不会收到邮件通知。
 
 **Q: GitHub Pages 是什么？**
 

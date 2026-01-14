@@ -221,6 +221,10 @@ class EmailNotifier:
 
         return self._send(subject, body)
 
+    def _is_configured(self) -> bool:
+        """检查邮件是否已配置"""
+        return all([self.host, self.user, self.password, self.to_email])
+
     def _send(self, subject: str, html_body: str) -> bool:
         """
         发送邮件的底层方法
@@ -232,13 +236,8 @@ class EmailNotifier:
         Returns:
             是否发送成功
         """
-        # 检查配置
-        if not all([self.host, self.user, self.password, self.to_email]):
-            print("⚠️ 邮件配置不完整，跳过发送")
-            print(f"   Host: {bool(self.host)}")
-            print(f"   User: {bool(self.user)}")
-            print(f"   Password: {bool(self.password)}")
-            print(f"   To: {bool(self.to_email)}")
+        # 检查配置，未配置则静默跳过
+        if not self._is_configured():
             return False
 
         try:
