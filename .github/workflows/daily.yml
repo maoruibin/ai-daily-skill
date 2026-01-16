@@ -15,6 +15,7 @@ on:
     paths:
       - '.github/workflows/daily.yml'
       - 'src/**'
+      - 'docs/**'
       - 'requirements.txt'
 
 # 防止并发执行
