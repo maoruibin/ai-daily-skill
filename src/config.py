@@ -19,8 +19,51 @@ CLAUDE_MAX_TOKENS = 8192
 # ============================================================================
 # RSS 配置
 # ============================================================================
-RSS_URL = os.getenv("RSS_URL", "https://news.smol.ai/rss.xml")
+
+# 单个 RSS 源（环境变量覆盖时使用）
+RSS_URL = os.getenv("RSS_URL", "")
+
+# 多 RSS 源配置（默认启用）
+RSS_SOURCES = [
+    # AI 资讯专用源
+    "https://news.smol.ai/rss.xml",
+
+    # Hacker News - 最新资讯
+    "https://hnrss.org/newest",
+
+    # Hacker News - skills 关键词过滤
+    "https://hnrss.org/newest?q=skills",
+
+    # Hacker News - AI agent 相关
+    "https://hnrss.org/newest?q=agent+plugin",
+
+    # Hacker News - Claude 相关
+    "https://hnrss.org/newest?q=claude+anthropic",
+]
+
+# 环境变量可覆盖所有源（用逗号分隔）
+RSS_URLS = os.getenv("RSS_URLS", "")
+if RSS_URLS:
+    RSS_SOURCES = [url.strip() for url in RSS_URLS.split(",") if url.strip()]
+
 RSS_TIMEOUT = 30  # 秒
+
+# 关键词过滤配置
+KEYWORDS_FILTER = os.getenv("KEYWORDS_FILTER", "")  # 逗号分隔的关键词
+DEFAULT_KEYWORDS = [
+    "Claude", "Anthropic", "AI", "agent", "skill", "plugin",
+    "MCP", "Model Context Protocol", "LLM", "GPT", "OpenAI",
+    "LangChain", "workflow", "automation"
+]
+
+# 解析关键词列表
+def _parse_keywords(filter_str: str) -> list:
+    """解析关键词过滤字符串"""
+    if not filter_str or filter_str == "":
+        return DEFAULT_KEYWORDS
+    return [kw.strip() for kw in filter_str.split(",") if kw.strip()]
+
+KEYWORDS = _parse_keywords(KEYWORDS_FILTER)
 
 # ============================================================================
 # 输出配置

@@ -16,7 +16,10 @@ from src.config import (
     ZHIPU_API_KEY,
     OUTPUT_DIR,
     ENABLE_IMAGE_GENERATION,
-    FEISHU_WEBHOOK_URL
+    FEISHU_WEBHOOK_URL,
+    RSS_URL,
+    RSS_SOURCES,
+    KEYWORDS
 )
 from src.rss_fetcher import RSSFetcher
 from src.claude_analyzer import ClaudeAnalyzer
@@ -40,6 +43,55 @@ def print_banner():
 ╚════════════════════════════════════════════════════════════╝
 """
     print(banner)
+
+
+def _merge_entries_to_content(entries: list, target_date: str) -> dict:
+    """
+    将多个 RSS 条目合并成一个内容格式
+
+    Args:
+        entries: RSS 条目列表
+        target_date: 目标日期
+
+    Returns:
+        合并后的内容字典
+    """
+    if not entries:
+        return None
+
+    # 构建合并内容
+    merged_content = {
+        "title": f"AI 资讯日报 - {target_date}",
+        "link": entries[0].get("link", ""),
+        "guid": f"daily-{target_date}",
+        "description": f"来自 {len(entries)} 个源的 AI 资讯汇总",
+        "content": "",
+        "pubDate": target_date
+    }
+
+    # 合并所有条目的内容
+    content_parts = []
+    for i, entry in enumerate(entries[:20], 1):  # 最多 20 条
+        title = entry.get("title", "无标题")
+        link = entry.get("link", "")
+        summary = entry.get("summary", entry.get("description", ""))[:500]
+
+        # 来源信息
+        source = getattr(entry, '_source', '未知来源')
+
+        content_parts.append(f"""
+## {i}. {title}
+
+**来源**: {source}
+**链接**: {link}
+
+{summary}
+
+---
+""")
+
+    merged_content["content"] = "\n".join(content_parts)
+    return merged_content
 
 
 def get_target_date(days_offset: int = 2) -> str:
@@ -83,20 +135,50 @@ def main():
         print(f"   (北京时间: {datetime.now(timezone.utc) + timedelta(hours=8)} + 8h)")
         print()
 
+        # 检测运行模式
+        use_multi_source = not RSS_URL  # 如果没有设置单个 URL，使用多源模式
+        if use_multi_source:
+            print(f"[模式] 多源聚合模式")
+            print(f"   RSS 源数量: {len(RSS_SOURCES)}")
+            print(f"   关键词过滤: {', '.join(KEYWORDS[:5])}{'...' if len(KEYWORDS) > 5 else ''}")
+        else:
+            print(f"[模式] 单源模式: {RSS_URL}")
+        print()
+
         # 2. 下载并解析 RSS
         print(f"[步骤 1/{total_steps}] 下载 RSS...")
         fetcher = RSSFetcher()
-        rss_data = fetcher.fetch()
 
-        # 显示 RSS 信息
-        date_range = fetcher.get_date_range(rss_data)
-        if date_range[0] and date_range[1]:
-            print(f"   RSS 日期范围: {date_range[0]} ~ {date_range[1]}")
-        print()
+        if use_multi_source:
+            # 多源模式：并行抓取多个源
+            feeds = fetcher.fetch_multiple()
+            all_entries = fetcher.get_all_entries_from_sources()
+            filtered_entries = fetcher.filter_by_keywords(all_entries)
+            print()
+        else:
+            # 单源模式：保持原有逻辑
+            rss_data = fetcher.fetch()
+            date_range = fetcher.get_date_range(rss_data)
+            if date_range[0] and date_range[1]:
+                print(f"   RSS 日期范围: {date_range[0]} ~ {date_range[1]}")
+            print()
 
         # 3. 查找目标日期的内容
         print(f"[步骤 2/{total_steps}] 查找目标日期的资讯...")
-        content = fetcher.get_content_by_date(target_date, rss_data)
+        content = None
+
+        if use_multi_source:
+            # 多源模式：从所有源查找匹配日期的条目
+            matched_entries = fetcher.get_content_by_date_from_sources(target_date)
+
+            if matched_entries:
+                # 合并多个条目的内容
+                content = _merge_entries_to_content(matched_entries, target_date)
+            else:
+                content = None
+        else:
+            # 单源模式：保持原有逻辑
+            content = fetcher.get_content_by_date(target_date, rss_data)
 
         if not content:
             print("   目标日期无内容，生成空页面")
