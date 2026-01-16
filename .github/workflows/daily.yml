@@ -71,6 +71,9 @@ jobs:
           SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
           NOTIFICATION_TO: ${{ secrets.NOTIFICATION_TO }}
 
+          # 飞书通知配置
+          FEISHU_WEBHOOK_URL: ${{ secrets.FEISHU_WEBHOOK_URL }}
+
           # 图片生成 API 配置（Firefly Card API）
           ENABLE_IMAGE_GENERATION: ${{ secrets.ENABLE_IMAGE_GENERATION || 'true' }}
           FIREFLY_API_URL: ${{ secrets.FIREFLY_API_URL || 'https://fireflycard-api.302ai.cn/api/saveImg' }}

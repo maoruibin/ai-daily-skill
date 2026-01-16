@@ -15,12 +15,14 @@ sys.path.insert(0, str(project_root))
 from src.config import (
     ZHIPU_API_KEY,
     OUTPUT_DIR,
-    ENABLE_IMAGE_GENERATION
+    ENABLE_IMAGE_GENERATION,
+    FEISHU_WEBHOOK_URL
 )
 from src.rss_fetcher import RSSFetcher
 from src.claude_analyzer import ClaudeAnalyzer
 from src.html_generator import HTMLGenerator
 from src.notifier import EmailNotifier
+from src.feishu_notifier import FeishuNotifier
 from src.image_generator import ImageGenerator
 from src.xiaohongshu_generator import XiaohongshuGenerator
 
@@ -66,7 +68,9 @@ def main():
 
     # 初始化组件
     notifier = EmailNotifier()
+    feishu_notifier = FeishuNotifier()
     email_enabled = notifier._is_configured()
+    feishu_enabled = feishu_notifier._is_configured()
     image_enabled = ENABLE_IMAGE_GENERATION
     total_steps = 6 if email_enabled else 5
     if image_enabled:
@@ -171,13 +175,34 @@ def main():
             print()
 
         # 7. 发送成功通知（可选）
-        if email_enabled:
+        if email_enabled or feishu_enabled:
             step_num = 6 if image_enabled else 5
-            print(f"[步骤 {step_num}/{total_steps}] 发送邮件通知...")
-            notifier.send_success(target_date, total_items)
+            print(f"[步骤 {step_num}/{total_steps}] 发送通知...")
+
+            # 邮件通知
+            if email_enabled:
+                notifier.send_success(target_date, total_items)
+
+            # 飞书通知
+            if feishu_enabled:
+                summary = result.get('summary', [])
+                keywords = result.get('keywords', [])
+
+                # 构建页面 URL
+                page_url = None
+                if os.getenv("GITHUB_PAGES_URL"):
+                    page_url = f"{os.getenv('GITHUB_PAGES_URL').rstrip('/')}/{target_date}.html"
+
+                feishu_notifier.send_summary(
+                    date=target_date,
+                    summary=summary,
+                    keywords=keywords,
+                    page_url=page_url
+                )
+
             print()
         else:
-            print("   (邮件通知未配置，跳过)")
+            print("   (通知未配置，跳过)")
             print()
 
         # 完成
@@ -200,13 +225,15 @@ def main():
         import traceback
         traceback.print_exc()
 
-        # 发送错误通知（如果配置了邮件）
-        if email_enabled:
-            try:
-                target_date = get_target_date(days_offset=2)
+        # 发送错误通知
+        try:
+            target_date = get_target_date(days_offset=2)
+            if email_enabled:
                 notifier.send_error(target_date, str(e))
-            except:
-                pass
+            if feishu_enabled:
+                feishu_notifier.send_error(target_date, str(e))
+        except:
+            pass
 
         sys.exit(1)
 
