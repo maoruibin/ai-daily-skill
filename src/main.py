@@ -190,8 +190,8 @@ def main():
 
                 # 构建页面 URL
                 page_url = None
-                if os.getenv("GITHUB_PAGES_URL"):
-                    page_url = f"{os.getenv('GITHUB_PAGES_URL').rstrip('/')}/{target_date}.html"
+                if os.getenv("SITE_URL"):
+                    page_url = f"{os.getenv('SITE_URL').rstrip('/')}/{target_date}.html"
 
                 feishu_notifier.send_summary(
                     date=target_date,

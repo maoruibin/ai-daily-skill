@@ -80,8 +80,8 @@ jobs:
           FIREFLY_API_URL: ${{ secrets.FIREFLY_API_URL || 'https://fireflycard-api.302ai.cn/api/saveImg' }}
           FIREFLY_API_KEY: ${{ secrets.FIREFLY_API_KEY }}
 
-          # GitHub Pages URL（用于邮件中的链接）
-          GITHUB_PAGES_URL: ${{ github.event.repository.html_url }}.github.io
+          # 网站 URL（用于飞书通知中的链接）
+          SITE_URL: ${{ secrets.SITE_URL || 'https://mauruibin.github.io/ai-daily-skill' }}
 
           # GitHub 环境变量（用于日志链接）
           GITHUB_REPOSITORY: ${{ github.repository }}
