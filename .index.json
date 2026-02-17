@@ -1,8 +1,8 @@
 [
   {
-    "date": "2026-02-14",
-    "url": "2026-02-14.html",
-    "summary": "Google 发布 Gemini-skills，旨在标准化模型与代理的技能交互。",
-    "timestamp": "2026-02-16T04:29:20.569427"
+    "date": "2026-02-15",
+    "url": "2026-02-15.html",
+    "summary": "SkillSandbox 发布 Rust 构建的 AI 智能体能力沙箱，通过 iptables 和 seccomp 严格隔离权限，防止恶意技能窃取凭证。",
+    "timestamp": "2026-02-17T04:23:28.871758"
   }
 ]
