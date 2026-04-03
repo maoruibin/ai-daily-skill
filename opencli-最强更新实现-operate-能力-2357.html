@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenCLI 最强更新：实现 operate 能力 - Twitter Daily</title>
+    <meta name="description" content="Twitter 推荐流资讯摘要">
+    <link rel="stylesheet" href="css/styles-light.css">
+</head>
+<body>
+    <!-- 主题切换按钮 -->
+    <button class="theme-toggle" onclick="toggleTheme()" title="切换日间/夜间模式">
+        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
+        <svg class="icon-moon" style="display:none" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+        </svg>
+    </button>
+
+    <div class="container">
+        <header class="header">
+            <div class="logo-icon">🐦</div>
+            <h1>Twitter Daily</h1>
+            <div class="date-badge">2026年4月3日 星期五</div>
+        </header>
+
+        <main class="main-content">
+            <div class="tweets-grid">
+
+        <article class="tweet-card">
+            <!-- 卡片头部：标签 + 标题 -->
+            <div class="card-header">
+                <div class="card-tags"><span class="tag">#AI工具</span> <span class="tag">#行业动态</span> <span class="tag">#自动化</span></div>
+                <h2 class="card-title">OpenCLI 最强更新：实现 operate 能力</h2>
+            </div>
+            
+            <!-- 摘要内容 -->
+            <div class="card-summary">
+                <p>opencli 最强更新来袭！！！实现了 operate 能力！以后可以prompt直接操作浏览器，并且 CLI 无痛生成！OpenCLI的目标是星辰大海！装上 SKILL 之后，就可以直接让 AI agent 操作我们的浏览器，然后沉淀为一个 CLI.</p>
+            </div>
+            
+            <!-- 关键信息 + 推荐理由 -->
+            <div class="card-meta">
+                <div class="meta-item">
+                    <span class="meta-icon">💡</span>
+                    <span class="meta-label">AI 点评：</span>
+                    <span class="meta-value">数据:593, 92, 44 | 涉及:CLI/AI</span>
+                </div>
+                
+                <div class="meta-item recommendation">
+                    <span class="meta-icon">💡</span>
+                    <span class="meta-label">推荐理由：</span>
+                    <div class="meta-value reasons-list">
+                          - ⚡ <strong>高关注度</strong> - 593 个喜欢,值得一看<br>
+  - 👤 <strong>发布者</strong>: @卡比卡比
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 卡片底部：互动数据 + 原文链接 -->
+            <div class="card-footer">
+                <div class="card-stats">
+                    <span class="stats-text">❤️ 593 🔄 92 💬 44</span>
+                </div>
+                <a href="https://x.com/jakevin7/status/2039707706370806084" class="card-link" target="_blank" rel="noopener">
+                    查看原文 →
+                </a>
+            </div>
+        </article>
+
+        <article class="tweet-card">
+            <!-- 卡片头部：标签 + 标题 -->
+            <div class="card-header">
+                <div class="card-tags"><span class="tag">#AI工具</span> <span class="tag">#技术写作</span></div>
+                <h2 class="card-title">Claude Code 源码解析书籍访问量突破 14k</h2>
+            </div>
+            
+            <!-- 摘要内容 -->
+            <div class="card-summary">
+                <p>承蒙诸位在Claude Code源码解析的茫茫书海里，偏偏相中了这两本小书——过去24小时，访问量竟一口气冲破14k！流量最猛的几位老铁是美国、中国、香港、新加坡、日本、台湾。我当初动手写这两本书，就在深思这个问题：在Claude Code时代，技术写作应该如何进化？</p>
+            </div>
+            
+            <!-- 关键信息 + 推荐理由 -->
+            <div class="card-meta">
+                <div class="meta-item">
+                    <span class="meta-icon">💡</span>
+                    <span class="meta-label">AI 点评：</span>
+                    <span class="meta-value">数据:24, 14k, 518</span>
+                </div>
+                
+                <div class="meta-item recommendation">
+                    <span class="meta-icon">💡</span>
+                    <span class="meta-label">推荐理由：</span>
+                    <div class="meta-value reasons-list">
+                          - ⚡ <strong>高关注度</strong> - 518 个喜欢,值得一看<br>
+  - 📚 <strong>学习价值</strong> - 提供具体的方法论/教程<br>
+  - 🔍 <strong>深度内容</strong> - 提供技术深度解析<br>
+  - 👤 <strong>发布者</strong>: @WquGuru
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 卡片底部：互动数据 + 原文链接 -->
+            <div class="card-footer">
+                <div class="card-stats">
+                    <span class="stats-text">❤️ 518 🔄 126 💬 13</span>
+                </div>
+                <a href="https://x.com/wquguru/status/2039721219390591415" class="card-link" target="_blank" rel="noopener">
+                    查看原文 →
+                </a>
+            </div>
+        </article>
+
+        <article class="tweet-card">
+            <!-- 卡片头部：标签 + 标题 -->
+            <div class="card-header">
+                <div class="card-tags"><span class="tag">#AI工具</span></div>
+                <h2 class="card-title">LLM 知识库管理经验分享</h2>
+            </div>
+            
+            <!-- 摘要内容 -->
+            <div class="card-summary">
+                <p>我维护 LLM 知识库已经一年多了。借鉴了 karpathy 的 LLM 知识库设置，主要是 LLM 健康检查。我目前尝试用随机方法。积累了 1107 个文件，4 年时间，对上下文来说太大了。</p>
+            </div>
+            
+            <!-- 关键信息 + 推荐理由 -->
+            <div class="card-meta">
+                <div class="meta-item">
+                    <span class="meta-icon">💡</span>
+                    <span class="meta-label">AI 点评：</span>
+                    <span class="meta-value">数据:1107, 4, 113 | 涉及:LLM</span>
+                </div>
+                
+                <div class="meta-item recommendation">
+                    <span class="meta-icon">💡</span>
+                    <span class="meta-label">推荐理由：</span>
+                    <div class="meta-value reasons-list">
+                          - 📈 <strong>受关注</strong> - 113 个喜欢<br>
+  - 📚 <strong>学习价值</strong> - 提供具体的方法论/教程<br>
+  - 👤 <strong>发布者</strong>: @Elvis
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 卡片底部：互动数据 + 原文链接 -->
+            <div class="card-footer">
+                <div class="card-stats">
+                    <span class="stats-text">❤️ 113 🔄 1 💬 11</span>
+                </div>
+                <a href="https://x.com/elvissun/status/2040022511107416542" class="card-link" target="_blank" rel="noopener">
+                    查看原文 →
+                </a>
+            </div>
+        </article>
+
+        <article class="tweet-card">
+            <!-- 卡片头部：标签 + 标题 -->
+            <div class="card-header">
+                <div class="card-tags"><span class="tag">#AI工具</span> <span class="tag">#开源项目</span> <span class="tag">#职场技能</span></div>
+                <h2 class="card-title">Magic Resume: 开源简历编辑器推荐</h2>
+            </div>
+            
+            <!-- 摘要内容 -->
+            <div class="card-summary">
+                <p>给最近求职面试的同学，推荐一款开源的简历编辑器：Magic Resume，所见即得，边写边看效果。支持自定义主题和深色模式，写完直接导出 PDF，数据全部存在本地浏览器里，不用担心隐私泄露。还内置了 AI 功能。</p>
+            </div>
+            
+            <!-- 关键信息 + 推荐理由 -->
+            <div class="card-meta">
+                <div class="meta-item">
+                    <span class="meta-icon">💡</span>
+                    <span class="meta-label">AI 点评：</span>
+                    <span class="meta-value">Magic Resume | 数据:1091, 227, 11 | 涉及:AI</span>
+                </div>
+                
+                <div class="meta-item recommendation">
+                    <span class="meta-icon">💡</span>
+                    <span class="meta-label">推荐理由：</span>
+                    <div class="meta-value reasons-list">
+                          - 🔥 <strong>超高热度</strong> - 1091 个喜欢,说明引发强烈共鸣<br>
+  - ✅ <strong>实用价值高</strong> - 开箱即用的工具/资源<br>
+  - 👤 <strong>发布者</strong>: @GitHubDaily
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 卡片底部：互动数据 + 原文链接 -->
+            <div class="card-footer">
+                <div class="card-stats">
+                    <span class="stats-text">❤️ 1091 🔄 227 💬 11</span>
+                </div>
+                <a href="https://x.com/GitHub_Daily/status/2039553537483620754" class="card-link" target="_blank" rel="noopener">
+                    查看原文 →
+                </a>
+            </div>
+        </article>
+
+        <article class="tweet-card">
+            <!-- 卡片头部：标签 + 标题 -->
+            <div class="card-header">
+                <div class="card-tags"><span class="tag">#AI工具</span> <span class="tag">#学习资源</span></div>
+                <h2 class="card-title">Learn Anything: 离谱的学习网站</h2>
+            </div>
+            
+            <!-- 摘要内容 -->
+            <div class="card-summary">
+                <p>一个很离谱的学习网站：Learn Anything。这是一个能帮你找到任何学习资源的网站，只要输入你想学的内容关键词，比如绘画、摄影、AI、编程、英语等等，它就能立刻帮你整理出一整套超清晰的学习路径、最优资源以及知识结构图。</p>
+            </div>
+            
+            <!-- 关键信息 + 推荐理由 -->
+            <div class="card-meta">
+                <div class="meta-item">
+                    <span class="meta-icon">💡</span>
+                    <span class="meta-label">AI 点评：</span>
+                    <span class="meta-value">Learn Anything | 数据:1845, 445, 17 | 涉及:AI</span>
+                </div>
+                
+                <div class="meta-item recommendation">
+                    <span class="meta-icon">💡</span>
+                    <span class="meta-label">推荐理由：</span>
+                    <div class="meta-value reasons-list">
+                          - 🔥 <strong>超高热度</strong> - 1845 个喜欢,说明引发强烈共鸣<br>
+  - 👤 <strong>发布者</strong>: @无颜
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 卡片底部：互动数据 + 原文链接 -->
+            <div class="card-footer">
+                <div class="card-stats">
+                    <span class="stats-text">❤️ 1845 🔄 445 💬 17</span>
+                </div>
+                <a href="https://x.com/WY_mask/status/2039530758893887992" class="card-link" target="_blank" rel="noopener">
+                    查看原文 →
+                </a>
+            </div>
+        </article>
+
+        <article class="tweet-card">
+            <!-- 卡片头部：标签 + 标题 -->
+            <div class="card-header">
+                <div class="card-tags"><span class="tag">#AI工具</span> <span class="tag">#行业动态</span></div>
+                <h2 class="card-title">NVIDIA GTC: 液冷技术与数据中心效率</h2>
+            </div>
+            
+            <!-- 摘要内容 -->
+            <div class="card-summary">
+                <p>Nvidia CEO 黄仁勋在 NVIDIA GTC Keynote 上谈到了液冷技术和数据中心效率。随着 AI 算力需求暴增，液冷成为提升能效的关键技术。</p>
+            </div>
+            
+            <!-- 关键信息 + 推荐理由 -->
+            <div class="card-meta">
+                <div class="meta-item">
+                    <span class="meta-icon">💡</span>
+                    <span class="meta-label">AI 点评：</span>
+                    <span class="meta-value">NVIDIA GTC | 数据:625, 88, 29 | 涉及:AI</span>
+                </div>
+                
+                <div class="meta-item recommendation">
+                    <span class="meta-icon">💡</span>
+                    <span class="meta-label">推荐理由：</span>
+                    <div class="meta-value reasons-list">
+                          - ⚡ <strong>高关注度</strong> - 625 个喜欢,值得一看<br>
+  - 👤 <strong>发布者</strong>: @CNET
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 卡片底部：互动数据 + 原文链接 -->
+            <div class="card-footer">
+                <div class="card-stats">
+                    <span class="stats-text">❤️ 625 🔄 88 💬 29</span>
+                </div>
+                <a href="https://x.com/CNET/status/2038672595193827743" class="card-link" target="_blank" rel="noopener">
+                    查看原文 →
+                </a>
+            </div>
+        </article>
+
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>© 2026 Twitter Daily · 自动生成</p>
+        </footer>
+    </div>
+
+    <script src="js/theme.js"></script>
+</body>
+</html>
