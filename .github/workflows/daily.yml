@@ -1,26 +1,19 @@
-name: AI Daily News Generator
+name: Deploy to GitHub Pages
 
 on:
-  # 每天 UTC 02:00 执行 = 北京时间 10:00
-  schedule:
-    - cron: '0 2 * * *'
-
-  # 允许手动触发
-  workflow_dispatch:
-
-  # 推送到 main 分支时触发（可选，用于测试）
+  # 推送到 main 分支的 docs 目录时触发
   push:
     branches:
       - main
     paths:
-      - '.github/workflows/daily.yml'
-      - 'src/**'
       - 'docs/**'
-      - 'requirements.txt'
+
+  # 允许手动触发
+  workflow_dispatch:
 
 # 防止并发执行
 concurrency:
-  group: ai-daily
+  group: ai-daily-deploy
   cancel-in-progress: false
 
 # 权限配置
@@ -28,12 +21,11 @@ permissions:
   contents: write
 
 jobs:
-  build:
-    name: 生成 AI 资讯日报
+  deploy:
+    name: 部署到 GitHub Pages
     runs-on: ubuntu-latest
 
-    # 设置超时时间（30分钟）
-    timeout-minutes: 30
+    timeout-minutes: 10
 
     steps:
       - name: 检出代码
@@ -41,65 +33,13 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: 设置 Python 环境
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-          cache: 'pip'
-
-      - name: 安装依赖
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
-      - name: 显示环境信息
-        run: |
-          echo "Python 版本: $(python --version)"
-          echo "工作目录: $(pwd)"
-          echo "当前时间 (UTC): $(date -u)"
-          echo "目标日期 (前两天): $(date -u -d '2 days ago' +%Y-%m-%d)"
-
-      - name: 运行 AI Daily 生成器
-        env:
-          # Claude API 配置（使用智谱代理）
-          ZHIPU_API_KEY: ${{ secrets.ZHIPU_API_KEY }}
-          ANTHROPIC_BASE_URL: ${{ secrets.ANTHROPIC_BASE_URL }}
-
-          # 邮件通知配置
-          SMTP_HOST: ${{ secrets.SMTP_HOST }}
-          SMTP_PORT: ${{ secrets.SMTP_PORT }}
-          SMTP_USER: ${{ secrets.SMTP_USER }}
-          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
-          NOTIFICATION_TO: ${{ secrets.NOTIFICATION_TO }}
-
-          # 飞书通知配置
-          FEISHU_WEBHOOK_URL: ${{ secrets.FEISHU_WEBHOOK_URL }}
-
-          # 图片生成 API 配置（Firefly Card API）
-          ENABLE_IMAGE_GENERATION: ${{ secrets.ENABLE_IMAGE_GENERATION || 'true' }}
-          FIREFLY_API_URL: ${{ secrets.FIREFLY_API_URL || 'https://fireflycard-api.302ai.cn/api/saveImg' }}
-          FIREFLY_API_KEY: ${{ secrets.FIREFLY_API_KEY }}
-
-          # 网站 URL（用于飞书通知中的链接）
-          SITE_URL: ${{ secrets.SITE_URL || 'https://mauruibin.github.io/ai-daily-skill' }}
-
-          # GitHub 环境变量（用于日志链接）
-          GITHUB_REPOSITORY: ${{ github.repository }}
-          GITHUB_SERVER_URL: ${{ github.server_url }}
-        run: |
-          python src/main.py
-
-      - name: 检查生成结果
+      - name: 检查 docs 目录
         run: |
           if [ ! -d "docs" ]; then
             echo "❌ 错误: docs 目录不存在"
             exit 1
           fi
-          if [ ! -f "docs/index.html" ]; then
-            echo "❌ 错误: index.html 未生成"
-            exit 1
-          fi
-          echo "✅ 文件检查通过"
+          echo "✅ docs 目录检查通过"
           ls -lh docs/
 
       - name: 部署到 GitHub Pages
@@ -108,14 +48,11 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs
           keep_files: true
-          commit_message: '🤖 Auto update AI Daily - {{ date }}'
+          commit_message: '🚀 Deploy AI Daily from local'
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
 
-      - name: 上传构建产物（用于调试）
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: ai-daily-output
-          path: docs/
-          retention-days: 7
+      - name: 部署完成
+        run: |
+          echo "✅ 部署完成"
+          echo "🔗 https://maoruibin.github.io/ai-daily-skill/"
