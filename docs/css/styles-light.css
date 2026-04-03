@@ -384,3 +384,16 @@ body {
         gap: 24px; /* 移动端减小卡片间距 */
     }
 }
+/* AI 点评样式 */
+.ai-comment {
+    background: var(--accent-light);
+    padding: 12px 16px;
+    border-radius: 8px;
+    border-left: 3px solid var(--accent);
+}
+
+.ai-comment .meta-value {
+    font-size: 14px;
+    color: var(--text-primary);
+    font-weight: 500;
+}
