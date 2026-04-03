@@ -240,8 +240,8 @@ body {
 
 .meta-label {
     font-size: 14px; /* 模块标题字号 14px */
-    font-weight: 600; /* 加粗 */
-    color: var(--text-primary);
+    font-weight: 700; /* 加粗 */
+    color: var(--accent); /* 用强调色 */
 }
 
 .meta-value {
