@@ -1,6 +1,6 @@
 /* ========================================
-   Twitter Daily - 有审美的前端工程师风格
-   支持日间/夜间模式切换
+   Twitter Daily - Notion 风格信息卡片
+   简洁优雅，信息清晰
    ======================================== */
 
 /* CSS 变量 */
@@ -58,7 +58,7 @@ body {
    ======================================== */
 
 .container {
-    max-width: 900px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 60px 20px;
 }
@@ -70,10 +70,6 @@ body {
 .header {
     text-align: center;
     margin-bottom: 60px;
-}
-
-.header-center {
-    margin-bottom: 80px;
 }
 
 .logo-icon {
@@ -97,12 +93,6 @@ body {
     letter-spacing: -0.02em;
 }
 
-.subtitle {
-    font-size: 16px;
-    color: var(--text-secondary);
-    margin-top: 8px;
-}
-
 .date-badge {
     display: inline-block;
     padding: 6px 16px;
@@ -111,7 +101,6 @@ body {
     border-radius: 20px;
     font-size: 13px;
     font-weight: 500;
-    margin-top: 12px;
 }
 
 /* 主题切换按钮 */
@@ -148,291 +137,156 @@ body {
    ======================================== */
 
 .main-content {
-    max-width: 700px;
+    max-width: 900px;
     margin: 0 auto;
 }
 
-.index-page {
-    max-width: 800px;
-}
-
 /* ========================================
-   章节标题
+   Notion 风格卡片
    ======================================== */
 
-.section-title {
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: 20px;
+.tweets-grid {
     display: flex;
-    align-items: center;
-    gap: 10px;
+    flex-direction: column;
+    gap: 24px;
 }
 
-/* ========================================
-   核心摘要卡片
-   ======================================== */
-
-.summary-card {
+.tweet-card {
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 12px;
     padding: 24px;
-    margin-bottom: 40px;
-    box-shadow: var(--shadow);
-}
-
-.summary-list {
-    list-style: none;
-}
-
-.summary-item {
-    font-size: 15px;
-    line-height: 1.8;
-    padding: 10px 0;
-    padding-left: 20px;
-    position: relative;
-    color: var(--text-primary);
-}
-
-.summary-item::before {
-    content: "•";
-    position: absolute;
-    left: 0;
-    color: var(--accent);
-    font-size: 18px;
-}
-
-.summary-item:not(:last-child) {
-    border-bottom: 1px solid var(--border);
-}
-
-/* ========================================
-   分类区块
-   ======================================== */
-
-.category-section {
-    margin-bottom: 48px;
-}
-
-.category-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.category-icon {
-    font-size: 24px;
-}
-
-.category-title {
-    font-size: 22px;
-    font-weight: 600;
-    color: var(--text-primary);
-    flex: 1;
-}
-
-.category-count {
-    padding: 4px 12px;
-    background: var(--accent);
-    color: white;
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: 600;
-}
-
-/* ========================================
-   资讯卡片网格
-   ======================================== */
-
-.news-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.news-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px;
     transition: all var(--transition-duration);
     box-shadow: var(--shadow);
 }
 
-.news-card:hover {
+.tweet-card:hover {
     border-color: var(--accent);
-    transform: translateY(-2px);
     box-shadow: 0 8px 16px -2px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
 }
 
-.news-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 12px;
-    margin-bottom: 10px;
-}
-
-.news-title {
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--text-primary);
-    flex: 1;
-}
-
-.item-link {
-    padding: 6px 14px;
-    background: var(--accent);
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
-    font-size: 12px;
-    font-weight: 500;
-    white-space: nowrap;
-    transition: opacity var(--transition-duration);
-}
-
-.item-link:hover {
-    opacity: 0.9;
-}
-
-.news-summary {
-    color: var(--text-secondary);
-    font-size: 14px;
-    line-height: 1.7;
-    margin-bottom: 12px;
-}
-
-.item-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-}
-
-.tag {
-    padding: 4px 10px;
-    background: var(--bg-secondary);
-    border-radius: 6px;
-    font-size: 12px;
-    color: var(--text-tertiary);
-}
-
-/* ========================================
-   关键词页脚
-   ======================================== */
-
-.keywords-footer {
-    text-align: center;
-    padding: 24px 0;
-    border-top: 1px solid var(--border);
-    margin-top: 32px;
-}
-
-.keywords-footer p {
-    color: var(--text-tertiary);
-    font-size: 13px;
-}
-
-/* ========================================
-   空状态
-   ======================================== */
-
-.empty-state {
-    text-align: center;
-    padding: 60px 20px;
-}
-
-.empty-icon {
-    font-size: 48px;
+/* 卡片头部 */
+.card-header {
     margin-bottom: 16px;
 }
 
-.empty-state h2 {
-    font-size: 20px;
-    color: var(--text-primary);
+.card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
     margin-bottom: 12px;
 }
 
-.empty-state p {
-    color: var(--text-secondary);
-    margin-bottom: 8px;
+.tag {
+    display: inline-block;
+    padding: 4px 12px;
+    background: var(--accent-light);
+    color: var(--accent);
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
 }
 
-.btn-primary {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 24px;
+.card-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.4;
+}
+
+/* 摘要内容 */
+.card-summary {
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+}
+
+.card-summary p {
+    color: var(--text-secondary);
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+/* 关键信息 + 推荐理由 */
+.card-meta {
+    margin-bottom: 20px;
+}
+
+.meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.meta-item:last-child {
+    margin-bottom: 0;
+}
+
+.meta-icon {
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+.meta-label {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+.meta-value {
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.meta-value.reasons-list {
+    flex: 1;
+}
+
+/* 推荐理由列表 */
+.recommendation .meta-value {
+    padding-left: 4px;
+}
+
+/* 卡片底部 */
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+}
+
+.card-stats {
+    display: flex;
+    gap: 16px;
+}
+
+.stats-text {
+    color: var(--text-tertiary);
+    font-size: 13px;
+}
+
+.card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 16px;
     background: var(--accent);
     color: white;
     text-decoration: none;
     border-radius: 8px;
-    font-weight: 500;
-}
-
-/* ========================================
-   索引页
-   ======================================== */
-
-.index-section {
-    margin-bottom: 32px;
-}
-
-.index-entries {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.index-entry {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
-    transition: all var(--transition-duration);
-    box-shadow: var(--shadow);
-}
-
-.index-entry:hover {
-    border-color: var(--accent);
-    transform: translateX(4px);
-}
-
-.entry-link {
-    display: block;
-    padding: 16px 20px;
-    text-decoration: none;
-}
-
-.entry-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 6px;
-}
-
-.entry-date {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text-primary);
-}
-
-.entry-arrow {
-    font-size: 18px;
-    color: var(--accent);
-}
-
-.entry-summary {
-    color: var(--text-secondary);
     font-size: 13px;
+    font-weight: 500;
+    transition: all var(--transition-duration);
 }
 
-.empty-message {
-    text-align: center;
-    padding: 40px 20px;
-    color: var(--text-secondary);
+.card-link:hover {
+    opacity: 0.9;
+    transform: translateX(2px);
 }
 
 /* ========================================
@@ -443,7 +297,6 @@ body {
     text-align: center;
     padding: 32px 20px;
     margin-top: 60px;
-    border-top: 1px solid var(--border);
 }
 
 .footer p {
@@ -470,20 +323,23 @@ body {
         font-size: 24px;
     }
 
-    .section-title {
+    .tweet-card {
+        padding: 20px;
+    }
+
+    .card-title {
         font-size: 18px;
     }
 
-    .category-title {
-        font-size: 20px;
-    }
-
-    .news-card-header {
+    .card-footer {
         flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
     }
 
-    .item-link {
-        align-self: flex-start;
+    .card-link {
+        width: 100%;
+        justify-content: center;
     }
 
     .theme-toggle {
@@ -495,16 +351,17 @@ body {
 }
 
 @media (max-width: 480px) {
-    .summary-card {
+    .tweet-card {
         padding: 16px;
-    }
-
-    .news-card {
-        padding: 14px;
     }
 
     .date-badge {
         font-size: 11px;
         padding: 5px 12px;
+    }
+
+    .tag {
+        font-size: 11px;
+        padding: 3px 10px;
     }
 }
