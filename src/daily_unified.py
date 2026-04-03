@@ -396,34 +396,38 @@ def git_push(commit_message: str):
 # 通知
 # ============================================================================
 
-def send_notification(title: str, slug: str, summary: List[str]):
+def send_notification(title: str, slug: str, summary: List[str], html_path: str):
     """发送通知到 TG 和飞书"""
     
     # GitHub Pages URL
     site_url = os.getenv("SITE_URL", "https://maoruibin.github.io/ai-daily-skill")
     page_url = f"{site_url}/{slug}.html"
     
-    # 发送到 Telegram
+    # 发送到 Telegram（文件 + 链接）
     log("发送到 Telegram...", "STEP")
-    message = f"📰 *{title}*\n\n"
-    message += "\n".join([f"• {s}" for s in summary[:5]])
-    message += f"\n\n🔗 [查看详情]({page_url})"
     
-    url = f"https://api.telegram.org/bot{TG_BOT_TOKEN}/sendMessage"
-    data = {
-        "chat_id": TG_CHAT_ID,
-        "text": message,
-        "parse_mode": "Markdown"
-    }
+    # 1. 先发送本地 HTML 文件
+    import subprocess
+    url = f"https://api.telegram.org/bot{TG_BOT_TOKEN}/sendDocument"
     
-    cmd = ["curl", "-s", "-X", "POST",
-           "-H", "Content-Type: application/json",
-           "-d", json.dumps(data),
-           url]
+    caption = f"📰 *{title}*\n\n"
+    caption += "\n".join([f"• {s}" for s in summary[:5]])
+    caption += f"\n\n🔗 [在线查看]({page_url})"
+    
+    cmd = [
+        "curl", "-s", "-X", "POST",
+        "-F", f"chat_id={TG_CHAT_ID}",
+        "-F", f"document=@{html_path}",
+        "-F", f"caption={caption}",
+        "-F", "parse_mode=Markdown",
+        url
+    ]
     
     result = subprocess.run(cmd, capture_output=True, text=True)
     if result.returncode == 0:
-        log("已发送到 Telegram", "SUCCESS")
+        log("已发送到 Telegram（文件 + 链接）", "SUCCESS")
+    else:
+        log(f"Telegram 发送失败: {result.stderr}", "WARN")
     
     # 发送到飞书
     if FEISHU_WEBHOOK_URL:
@@ -535,7 +539,7 @@ def main():
         
         # 9. 发送通知
         summary = analysis_result.get("summary", [])
-        send_notification(title, slug, summary)
+        send_notification(title, slug, summary, html_path)
         
         print("\n" + "=" * 60)
         log("🎉 完成！", "SUCCESS")
