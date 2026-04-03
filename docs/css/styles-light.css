@@ -58,7 +58,7 @@ body {
    ======================================== */
 
 .container {
-    max-width: 1000px;
+    max-width: 900px;
     margin: 0 auto;
     padding: 60px 20px;
 }
@@ -86,11 +86,10 @@ body {
 }
 
 .header h1 {
-    font-size: 36px;
+    font-size: 32px;
     font-weight: 700;
     color: var(--text-primary);
     margin-bottom: 8px;
-    letter-spacing: -0.02em;
 }
 
 .date-badge {
@@ -137,25 +136,29 @@ body {
    ======================================== */
 
 .main-content {
-    max-width: 900px;
+    max-width: 800px;
     margin: 0 auto;
 }
 
 /* ========================================
-   Notion 风格卡片
+   推文卡片网格（增大间距）
    ======================================== */
 
 .tweets-grid {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 32px; /* 卡片之间间距 32px */
 }
+
+/* ========================================
+   推文卡片（Notion 风格）
+   ======================================== */
 
 .tweet-card {
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 24px;
+    padding: 28px; /* 增加内边距 */
     transition: all var(--transition-duration);
     box-shadow: var(--shadow);
 }
@@ -166,9 +169,12 @@ body {
     transform: translateY(-2px);
 }
 
-/* 卡片头部 */
+/* ========================================
+   卡片头部（标签 + 标题）
+   ======================================== */
+
 .card-header {
-    margin-bottom: 16px;
+    margin-bottom: 20px; /* 模块间距 20px */
 }
 
 .card-tags {
@@ -181,93 +187,101 @@ body {
 .tag {
     display: inline-block;
     padding: 4px 12px;
-    background: var(--accent-light);
+    background: var(--bg-secondary);
     color: var(--accent);
     border-radius: 6px;
-    font-size: 12px;
+    font-size: 12px; /* 标签字号 12px */
     font-weight: 500;
 }
 
 .card-title {
-    font-size: 20px;
-    font-weight: 600;
+    font-size: 20px; /* 标题字号 20px */
+    font-weight: 700; /* 加粗 */
     color: var(--text-primary);
     line-height: 1.4;
 }
 
-/* 摘要内容 */
+/* ========================================
+   摘要内容（中等字号）
+   ======================================== */
+
 .card-summary {
-    margin-bottom: 16px;
-    padding-bottom: 16px;
+    margin-bottom: 24px; /* 模块间距 24px */
+    padding-bottom: 20px;
     border-bottom: 1px solid var(--border);
 }
 
 .card-summary p {
+    font-size: 15px; /* 摘要字号 15px */
+    line-height: 1.8;
     color: var(--text-secondary);
-    font-size: 15px;
-    line-height: 1.7;
 }
 
-/* 关键信息 + 推荐理由 */
+/* ========================================
+   卡片元信息（关键 + 推荐理由）
+   ======================================== */
+
 .card-meta {
-    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* 模块间距 16px */
+    margin-bottom: 24px;
 }
 
 .meta-item {
     display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    margin-bottom: 12px;
-}
-
-.meta-item:last-child {
-    margin-bottom: 0;
+    flex-direction: column;
+    gap: 8px; /* 行间距 8px */
 }
 
 .meta-icon {
-    font-size: 16px;
-    flex-shrink: 0;
+    font-size: 14px;
 }
 
 .meta-label {
-    font-weight: 600;
+    font-size: 14px; /* 模块标题字号 14px */
+    font-weight: 600; /* 加粗 */
     color: var(--text-primary);
-    font-size: 14px;
-    flex-shrink: 0;
 }
 
 .meta-value {
+    font-size: 14px; /* 模块内容字号 14px */
     color: var(--text-secondary);
-    font-size: 14px;
     line-height: 1.6;
 }
 
-.meta-value.reasons-list {
-    flex: 1;
-}
-
-/* 推荐理由列表 */
-.recommendation .meta-value {
+/* 推荐理由列表样式 */
+.meta-item.recommendation .meta-value {
     padding-left: 4px;
 }
 
-/* 卡片底部 */
+.meta-item.recommendation strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* ========================================
+   卡片底部（互动数据 + 原文链接）
+   ======================================== */
+
 .card-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 16px;
+    padding-top: 20px;
     border-top: 1px solid var(--border);
+    gap: 16px;
 }
 
 .card-stats {
     display: flex;
+    align-items: center;
     gap: 16px;
 }
 
 .stats-text {
+    font-size: 13px; /* 底部字号 13px */
     color: var(--text-tertiary);
-    font-size: 13px;
 }
 
 .card-link {
@@ -279,9 +293,10 @@ body {
     color: white;
     text-decoration: none;
     border-radius: 8px;
-    font-size: 13px;
+    font-size: 13px; /* 底部字号 13px */
     font-weight: 500;
     transition: all var(--transition-duration);
+    white-space: nowrap;
 }
 
 .card-link:hover {
@@ -363,5 +378,9 @@ body {
     .tag {
         font-size: 11px;
         padding: 3px 10px;
+    }
+    
+    .tweets-grid {
+        gap: 24px; /* 移动端减小卡片间距 */
     }
 }
