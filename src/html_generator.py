@@ -207,7 +207,7 @@ class HTMLGenerator:
         </footer>
 """
 
-        # 构建完整 HTML
+        # 构建完整 HTML - Markdown 简洁风格
         html = f"""<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -218,10 +218,7 @@ class HTMLGenerator:
     <meta name="keywords" content="{', '.join(keywords + SITE_META['keywords'])}">
     <link rel="stylesheet" href="css/styles.css">
 </head>
-<body data-theme="{result.get('theme', 'blue')}">
-    <div class="background-glow"></div>
-    <div class="geometric-lines"></div>
-
+<body>
     <div class="container">
         <header class="header">
             <div class="logo-icon">🤖</div>
