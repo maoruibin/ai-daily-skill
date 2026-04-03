@@ -98,50 +98,101 @@ def chinese_to_slug(text: str) -> str:
 
 
 # ============================================================================
-# 信息源 1: Twitter
+# 信息源 1: Twitter（复用 twitter-digest 技能的输出）
 # ============================================================================
+
+TWITTER_REPORTS_DIR = Path.home() / ".openclaw" / "workspace" / "reports" / "twitter"
 
 def fetch_twitter() -> List[Dict]:
     """
-    刷 Twitter 推荐流
+    读取 twitter-digest 技能生成的报告
     
     返回推文列表
     """
-    log("刷 Twitter 推荐流...", "STEP")
+    log("读取 Twitter 报告...", "STEP")
     
     try:
-        # 使用 browser 工具刷 Twitter
-        # 1. 导航到 Twitter
-        # 2. 获取页面快照
-        # 3. 提取推文内容
+        # 找到今天的报告
+        today = datetime.now().strftime("%Y-%m-%d")
+        report_file = TWITTER_REPORTS_DIR / f"{today}.md"
         
-        import requests
-        
-        browser_api = "http://127.0.0.1:18800"
-        
-        # 检查浏览器状态
-        try:
-            resp = requests.get(f"{browser_api}/", timeout=5)
-            if resp.status_code != 200:
-                log("浏览器未就绪，跳过 Twitter", "WARN")
+        if not report_file.exists():
+            # 尝试找最新的报告
+            reports = sorted(TWITTER_REPORTS_DIR.glob("*.md"), reverse=True)
+            if reports:
+                report_file = reports[0]
+                log(f"今天的报告不存在，使用最新报告: {report_file.name}")
+            else:
+                log("没有找到 Twitter 报告，跳过", "WARN")
                 return []
-        except:
-            log("浏览器连接失败，跳过 Twitter", "WARN")
-            return []
         
-        # TODO: 实现完整的 Twitter 抓取逻辑
-        # 这里需要：
-        # 1. 导航到 x.com/home
-        # 2. 等待页面加载
-        # 3. 滚动页面
-        # 4. 提取推文
+        # 解析 Markdown 报告
+        content = report_file.read_text(encoding='utf-8')
+        tweets = parse_twitter_report(content)
         
-        log("⚠️  Twitter 抓取逻辑待完善，暂时跳过", "WARN")
-        return []
+        log(f"✅ 读取到 {len(tweets)} 条推文", "SUCCESS")
+        return tweets
         
     except Exception as e:
-        log(f"Twitter 抓取失败: {e}", "ERROR")
+        log(f"读取 Twitter 报告失败: {e}", "ERROR")
         return []
+
+
+def parse_twitter_report(content: str) -> List[Dict]:
+    """
+    解析 Twitter 报告（支持 Markdown 和 JSON 格式）
+    
+    返回推文列表
+    """
+    tweets = []
+    
+    # 尝试 JSON 格式
+    if content.strip().startswith("["):
+        try:
+            return json.loads(content)
+        except:
+            pass
+    
+    # Markdown 格式：按 ### 分割
+    sections = content.split("### ")[1:]  # 跳过标题
+    
+    for section in sections:
+        lines = section.strip().split("\n")
+        if not lines:
+            continue
+        
+        title = lines[0].strip()
+        
+        # 提取内容
+        tweet_content = ""
+        url = ""
+        stats = ""
+        comment = ""
+        
+        for line in lines[1:]:
+            line = line.strip()
+            if line.startswith("> "):
+                tweet_content += line[2:] + " "
+            elif line.startswith("- 🔗 原文:") or line.startswith("- 🔗 原文："):
+                url = line.split(":", 1)[1].strip() if ":" in line else ""
+                url = line.split("：", 1)[1].strip() if "：" in line else url
+            elif line.startswith("- 📊 互动:") or line.startswith("- 📊 互动："):
+                stats = line.split(":", 1)[1].strip() if ":" in line else ""
+                stats = line.split("：", 1)[1].strip() if "：" in line else stats
+            elif line.startswith("- 💬 点评:") or line.startswith("- 💬 点评："):
+                comment = line.split(":", 1)[1].strip() if ":" in line else ""
+                comment = line.split("：", 1)[1].strip() if "：" in line else comment
+        
+        if title and tweet_content:
+            tweets.append({
+                "title": title,
+                "content": tweet_content.strip(),
+                "url": url,
+                "stats": stats,
+                "comment": comment
+            })
+    
+    return tweets
 
 
 # ============================================================================
