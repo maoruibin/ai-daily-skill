@@ -41,8 +41,8 @@ ENV/
 .coverage
 htmlcov/
 
-# 项目特定
-docs/*.html
+# 项目特定 - 允许 HTML 文件
+# docs/*.html - 已移除
 docs/css/
 docs/.index.json
 
