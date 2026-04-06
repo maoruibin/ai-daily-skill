@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitter Digest - 2026-04-05 晚间</title>
+    <meta name="description" content="Twitter 信息报告 - 2026年4月5日晚间">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+
+        .header .emoji {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        .header .meta {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 15px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .card-number {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        .card-title {
+            font-size: 1.5em;
+            color: #1a1a1a;
+            flex: 1;
+        }
+
+        .card-author {
+            color: #667eea;
+            font-weight: 500;
+            margin-bottom: 10px;
+            font-size: 0.95em;
+        }
+
+        .card-content {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            padding-left: 20px;
+            border-left: 3px solid #667eea;
+        }
+
+        .card-meta {
+            display: flex;
+            gap: 20px;
+            font-size: 0.85em;
+            color: #888;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .card-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .card-comment {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .summary-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .summary-card h2 {
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .summary-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .summary-card li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .summary-card li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            font-size: 1.2em;
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+            padding: 20px;
+            font-size: 0.9em;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+            border-bottom: 1px dashed white;
+        }
+
+        .link-button {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: background 0.3s ease;
+        }
+
+        .link-button:hover {
+            background: #5568d3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="emoji">🐦</div>
+            <h1>Twitter 信息报告</h1>
+            <p style="color: #666; font-size: 1.1em; margin-top: 10px;">2026年4月5日 晚间</p>
+            <div class="meta">
+                📅 抓取时间：2026-04-05 18:10 | 📡 来源：Twitter/X 推荐流
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-number">1</div>
+                <div class="card-title">多平台数据抓取难题探讨</div>
+            </div>
+            <div class="card-author">@libukai</div>
+            <div class="card-content">
+                收到甲方爸爸的新需求，其核心是抓取指定账号在以下平台上发布的内容的各项数据：<br><br>
+                1. 小红书<br>
+                2. 视频号<br>
+                3. 抖音<br>
+                4. 公众号<br>
+                5. B 站<br>
+                6. 微博<br><br>
+                反正我搜了一圈，尝试了各种工具和各种服务，没有一个是能保证实现 365 天稳定抓取的。敢问各位天天用 AI 的朋友有什么方案？
+            </div>
+            <div class="card-meta">
+                <span>📅 2026-04-05 14:24</span>
+                <span>🔗 <a href="https://x.com/libukai/status/2040797685666525438" target="_blank" class="link-button">查看原文</a></span>
+            </div>
+            <div class="card-comment">
+                💬 点评：多平台数据抓取确实是技术圈的痛点，涉及反爬虫、平台限制、数据格式不统一等多重挑战。AI 时代可能有新解法。
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-number">2</div>
+                <div class="card-title">AIP 出海实战营抄袭事件</div>
+            </div>
+            <div class="card-author">@GoSailGlobal</div>
+            <div class="card-content">
+                经朋友提点，文案有歧义<br><br>
+                抄袭者 @XiaohuiAI666 参与我们 AIP 出海实战营，程序员小灰还是公众号大博主<br><br>
+                没想到这么没有底线
+            </div>
+            <div class="card-meta">
+                <span>📅 2026-04-04 04:04</span>
+                <span>🔗 <a href="https://x.com/GoSailGlobal/status/2040279298708537679" target="_blank" class="link-button">查看原文</a></span>
+            </div>
+            <div class="card-comment">
+                💬 点评：知识付费圈子的抄袭问题值得警惕，创作者需要保护自己的知识产权。
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-number">3</div>
+                <div class="card-title">吉姆·罗恩 1981 演讲：财富的底层逻辑</div>
+            </div>
+            <div class="card-author">@dachaoren</div>
+            <div class="card-content">
+                吉姆·罗恩在 1981 年的演讲，因为讲了这个世界财富的底层逻辑<br><br>
+                所以一直被封杀，尤其在国内，根本不允许看。<br><br>
+                五分钟就可以深度理解任何事物的运行法则。
+            </div>
+            <div class="card-meta">
+                <span>📅 2026-04-05 14:32</span>
+                <span>🔗 <a href="https://x.com/dachaoren/status/2040799680812953737" target="_blank" class="link-button">查看原文</a></span>
+            </div>
+            <div class="card-comment">
+                💬 点评：经典内容往往包含底层逻辑，学习经典、理解本质比追逐热点更重要。
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-number">4</div>
+                <div class="card-title">时间飞逝的感慨</div>
+            </div>
+            <div class="card-author">@tradermige</div>
+            <div class="card-content">
+                老哥从 25 岁到 45 岁只用了 10 秒
+            </div>
+            <div class="card-meta">
+                <span>📅 2026-04-05 09:36</span>
+                <span>🔗 <a href="https://x.com/tradermige/status/2040725309046292914" target="_blank" class="link-button">查看原文</a></span>
+            </div>
+            <div class="card-comment">
+                💬 点评：简单的一句话，道出了时间飞逝的感慨。珍惜当下，专注重要的事情。
+            </div>
+        </div>
+
+        <div class="summary-card">
+            <h2>📊 今日要点总结</h2>
+            <ul>
+                <li><strong>技术挑战</strong>：多平台数据抓取的稳定性问题仍然是技术圈的痛点</li>
+                <li><strong>知识产权</strong>：内容创作者需要警惕抄袭，保护自己的成果</li>
+                <li><strong>底层思维</strong>：学习经典内容，掌握事物的底层逻辑</li>
+                <li><strong>时间管理</strong>：时间飞逝，专注于重要的事情</li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <p>啾~ 报告生成完毕 | 2026-04-05 18:10</p>
+            <p style="margin-top: 10px;">
+                <a href="https://daily.gudong.site/" target="_blank">🏠 返回首页</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
