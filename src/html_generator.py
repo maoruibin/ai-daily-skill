@@ -690,23 +690,26 @@ body {
 .news-card {
     background: rgba(255, 255, 255, 0.03);
     border-radius: 12px;
-    padding: 24px;
+    padding: 28px;  /* 从 24px 增加到 28px */
+    margin: 32px 0;  /* 添加明确的上下间距 */
     border: 1px solid rgba(255, 255, 255, 0.08);
     transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);  /* 添加轻微阴影 */
 }
 
 .news-card:hover {
     background: rgba(255, 255, 255, 0.05);
     border-color: var(--accent-color);
     transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);  /* 增强悬停阴影 */
 }
 
 .news-card-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 16px;
-    margin-bottom: 12px;
+    gap: 20px;  /* 从 16px 增加到 20px */
+    margin-bottom: 16px;  /* 从 12px 增加到 16px */
 }
 
 .news-title {
@@ -717,26 +720,29 @@ body {
 }
 
 .item-link {
-    padding: 6px 16px;
+    padding: 10px 24px;  /* 从 6px 16px 增加到 10px 24px */
     background: var(--accent-color);
     color: #000;
     text-decoration: none;
     border-radius: 8px;
-    font-size: 13px;
+    font-size: 14px;  /* 从 13px 增加到 14px */
     font-weight: 500;
     white-space: nowrap;
-    transition: opacity 0.2s;
+    transition: all 0.2s;  /* 从 opacity 改为 all */
+    margin-top: 4px;  /* 添加顶部间距 */
 }
 
 .item-link:hover {
-    opacity: 0.8;
+    opacity: 0.85;  /* 从 0.8 改为 0.85 */
+    transform: translateY(-1px);  /* 添加轻微上移效果 */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);  /* 添加悬停阴影 */
 }
 
 .news-summary {
     color: var(--text-color);
     font-size: 15px;
     line-height: 1.7;
-    margin-bottom: 16px;
+    margin-bottom: 20px;  /* 从 16px 增加到 20px */
 }
 
 .item-tags {
