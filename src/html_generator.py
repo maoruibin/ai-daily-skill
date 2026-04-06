@@ -939,6 +939,78 @@ body {
         font-size: 12px;
         padding: 6px 14px;
     }
+
+    /* 统计数据优化样式 */
+    .stats-highlight {
+        margin: 16px 0;
+    }
+
+    .main-stats {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 8px;
+    }
+
+    .stat-item {
+        padding: 8px 16px;
+        background: rgba(66, 165, 245, 0.1);
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 500;
+        white-space: nowrap;
+    }
+
+    .stat-item.hot {
+        background: rgba(244, 67, 54, 0.15);
+        color: #f44336;
+    }
+
+    .more-stats {
+        margin-top: 8px;
+    }
+
+    .more-stats summary {
+        cursor: pointer;
+        color: #999;
+        font-size: 12px;
+        user-select: none;
+    }
+
+    .more-stats summary:hover {
+        color: #666;
+    }
+
+    .detail-stats {
+        margin-top: 6px;
+        padding-left: 12px;
+        font-size: 13px;
+        color: #666;
+    }
+
+    /* AI 点评优化样式 */
+    .ai-comment {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 12px;
+        padding: 16px;
+        margin: 16px 0;
+        color: white;
+        line-height: 1.8;
+    }
+
+    .ai-comment strong {
+        font-weight: 600;
+    }
+
+    @media (max-width: 600px) {
+        .main-stats {
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            font-size: 13px;
+            padding: 6px 12px;
+        }
+    }
 }
 """
         return css_content
