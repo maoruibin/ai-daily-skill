@@ -268,9 +268,10 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 20px;
+    padding: 20px 0 0 0;  /* 顶部边距，左右为 0 */
     border-top: 1px solid var(--border);
     gap: 16px;
+    margin: 0;  /* 确保没有负边距 */
 }
 
 .card-stats {
@@ -466,8 +467,4 @@ body {
 .tweet-card {
     padding: 28px;  /* 增加内边距 */
     margin: 32px 0;  /* 增加上下间距 */
-}
-
-.card-footer {
-    padding: 20px 0 0 0;  /* 增加顶部间距 */
 }
