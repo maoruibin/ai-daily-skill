@@ -397,3 +397,84 @@ body {
     color: var(--text-primary);
     font-weight: 500;
 }
+
+/* ========================================
+   统计数据优化样式（改进版）
+   ======================================== */
+
+.stats-highlight {
+    margin: 12px 0;
+}
+
+.main-stats {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.stat-item {
+    padding: 8px 16px;
+    background: var(--accent-light);
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.stat-item.hot {
+    background: rgba(244, 67, 54, 0.15);
+    color: #f44336;
+}
+
+.more-stats {
+    margin-top: 8px;
+}
+
+.more-stats summary {
+    cursor: pointer;
+    color: var(--text-tertiary);
+    font-size: 12px;
+    user-select: none;
+    padding: 4px 0;
+}
+
+.more-stats summary:hover {
+    color: var(--text-secondary);
+}
+
+.detail-stats {
+    margin-top: 6px;
+    padding-left: 12px;
+    font-size: 13px;
+    color: var(--text-tertiary);
+}
+
+/* ========================================
+   卡片间距和边距优化
+   ======================================== */
+
+.tweet-card {
+    padding: 28px;  /* 增加内边距 */
+    margin: 32px 0;  /* 增加上下间距 */
+}
+
+.card-footer {
+    padding: 20px 0 0 0;  /* 增加顶部间距 */
+}
+
+/* 移动端优化 */
+@media (max-width: 768px) {
+    .main-stats {
+        flex-wrap: wrap;
+    }
+
+    .stat-item {
+        font-size: 13px;
+        padding: 6px 12px;
+    }
+    
+    .tweet-card {
+        padding: 24px 20px;  /* 移动端左右边距 */
+        margin: 28px 0;
+    }
+}
