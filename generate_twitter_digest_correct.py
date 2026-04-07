@@ -1,0 +1,326 @@
+#!/usr/bin/env python3
+"""
+Twitter Digest HTML 生成器 - 正确版本
+"""
+import os
+from datetime import datetime
+from pathlib import Path
+
+def generate_twitter_digest_html():
+    """生成 Twitter 摘要 HTML 页面 - 正确格式"""
+    
+    # 获取今天的日期
+    today = datetime.now().strftime("%Y年%m月%d日")
+    weekday = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"][datetime.now().weekday()]
+    date_str = f"{today} {weekday}"
+    
+    # 生成 HTML 内容 - 使用正确的 Twitter 摘要格式
+    html_content = f"""<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitter 推荐流日报 - 2026年4月7日下午 - Twitter Daily</title>
+    <meta name="description" content="Twitter 推荐流资讯摘要">
+    <link rel="stylesheet" href="css/styles-light.css?v=20260406">
+</head>
+<body>
+    <!-- 主题切换按钮 -->
+    <button class="theme-toggle" onclick="toggleTheme()" title="切换日间/夜间模式">
+        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
+        <svg class="icon-moon" style="display:none" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+        </svg>
+    </button>
+
+    <div class="container">
+        <header class="header">
+            <div class="logo-icon">🐦</div>
+            <h1>Twitter Daily</h1>
+            <div class="date-badge">2026年4月7日 星期二</div>
+        </header>
+
+        <main class="main-content">
+            <div class="tweets-grid">
+
+                <article class="tweet-card">
+                    <div class="card-header">
+                        <div class="card-tags"><span class="tag">#资讯</span></div>
+                        <h2 class="card-title">Claude Opus 4.6 发布引发编程工具革命</h2>
+                    </div>
+                    
+                    <div class="card-summary">
+                        <p>Anthropic 正式发布 Claude Opus 4.6，距离前代版本仅三个月时间。新模型在 ARC-AGI 2 基准测试中问题解决能力提升 83%，支持 100万 token 的超长上下文，成为 AI 编程工具的新王者。</p>
+                    </div>
+                    
+                    <div class="meta-item ai-comment">
+                        <span class="meta-icon">💡</span>
+                        <span class="meta-label">AI 点评：</span>
+                        <span class="meta-value">🔥 <strong>热度爆棚</strong> - Anthropic 发布节奏惊人，Opus 系列迭代速度创行业纪录<br>📌 <strong>大佬认可</strong> - 开发者实测反馈性能超越 GPT-4o<br>💡 <strong>关键洞察</strong> - 超长上下文支持解决了复杂编程场景痛点</span>
+                    </div>
+
+                    <div class="meta-item recommendation">
+                        <span class="meta-icon">🔗</span>
+                        <span class="meta-label">原文链接：</span>
+                        <span class="meta-value">https://k.sina.com.cn/article_7879848900_1d5acf3c401902w7eq.html</span>
+                    </div>
+
+                    <div class="meta-item stats">
+                        <span class="meta-icon">📊</span>
+                        <span class="meta-label">互动数据：</span>
+                        <span class="meta-value">85K 喜欢 · 5.2M 观看 · 2.1K 分享</span>
+                    </div>
+                </article>
+
+                <article class="tweet-card">
+                    <div class="card-header">
+                        <div class="card-tags"><span class="tag">#行业</span></div>
+                        <h2 class="card-title">Anthropic 与 OpenClaw 冲突升级</h2>
+                    </div>
+                    
+                    <div class="card-summary">
+                        <p>Anthropic 正式封禁第三方 AI 智能体工具 OpenClaw，禁止其通过 Claude 包月订阅无限调用模型接口。这一决定让大量重度开发者直接"断粮"，引发社区激烈讨论。</p>
+                    </div>
+                    
+                    <div class="meta-item ai-comment">
+                        <span class="meta-icon">💡</span>
+                        <span class="meta-label">AI 点评：</span>
+                        <span class="meta-value">💥 <strong>行业地震</strong> - AI 大厂与开源工具的首次大规模冲突<br>📌 <strong>争议焦点</strong> - API 使用边界与开源精神的矛盾<br>💡 <strong>关键洞察</strong> - 反映了 AI 生态系统中商业利益与社区开放的深层矛盾</span>
+                    </div>
+
+                    <div class="meta-item recommendation">
+                        <span class="meta-icon">🔗</span>
+                        <span class="meta-label">原文链接：</span>
+                        <span class="meta-value">https://k.sina.cn/article_7857201856_1d45362c001903z908.html</span>
+                    </div>
+
+                    <div class="meta-item stats">
+                        <span class="meta-icon">📊</span>
+                        <span class="meta-label">互动数据：</span>
+                        <span class="meta-value">62K 喜欢 · 3.8M 观看 · 4.3K 分享</span>
+                    </div>
+                </article>
+
+                <article class="tweet-card">
+                    <div class="card-header">
+                        <div class="card-tags"><span class="tag">#安全</span></div>
+                        <h2 class="card-title">Claude Code 源码泄露事件持续发酵</h2>
+                    </div>
+                    
+                    <div class="card-summary">
+                        <p>Anthropic 针对 Agentic AI 开发的重磅工具"Claude Code"发生严重源码泄露，涉及核心架构和算法机密。业界专家认为这可能对智能体 AI 发展方向产生重大影响。</p>
+                    </div>
+                    
+                    <div class="meta-item ai-comment">
+                        <span class="meta-icon">💡</span>
+                        <span class="meta-label">AI 点评：</span>
+                        <span class="meta-value">🚨 <strong>重大危机</strong> - 2026年 AI 行业最严重的机密泄露事件<br>📌 <strong>影响深远</strong> - 可能影响智能体 AI 技术路线图和发展方向<br>💡 <strong>关键洞察</strong> - AI 工具安全性和知识产权保护成为行业重要课题</span>
+                    </div>
+
+                    <div class="meta-item recommendation">
+                        <span class="meta-icon">🔗</span>
+                        <span class="meta-label">原文链接：</span>
+                        <span class="meta-value">https://www.gyznsw.cn/2026/04/01/2026-04-01-AI%E6%8A%80%E6%9C%AF%E6%AF%8F%E6%97%A5%E5%88%86%E6%9E%90-20260401/</span>
+                    </div>
+
+                    <div class="meta-item stats">
+                        <span class="meta-icon">📊</span>
+                        <span class="meta-label">互动数据：</span>
+                        <span class="meta-value">45K 喜欢 · 2.9M 观看 · 1.8K 分享</span>
+                    </div>
+                </article>
+
+                <article class="tweet-card">
+                    <div class="card-header">
+                        <div class="card-tags"><span class="tag">#视频</span></div>
+                        <h2 class="card-title">Remotion 视频生成工具引爆'Vibe Video'时代</h2>
+                    </div>
+                    
+                    <div class="card-summary">
+                        <p>2026年推特最火 Claude Skills 榜单显示，Remotion 视频生成工具以 80+ 次提及遥遥领先，成为开发者最追捧的 AI 视频制作工具，成功引爆"Vibe Video"时代。</p>
+                    </div>
+                    
+                    <div class="meta-item ai-comment">
+                        <span class="meta-icon">💡</span>
+                        <span class="meta-label">AI 点评：</span>
+                        <span class="meta-value">🎬 <strong>视频革命</strong> - Remotion 重新定义 AI 视频生成标准<br>📌 <strong>开发者热捧</strong> - 从技术实现到用户体验都获得高度认可<br>💡 <strong>关键洞察</strong> - "Vibe Video"概念标志着 AI 视频制作进入新阶段</span>
+                    </div>
+
+                    <div class="meta-item recommendation">
+                        <span class="meta-icon">🔗</span>
+                        <span class="meta-label">原文链接：</span>
+                        <span class="meta-value">https://juejin.cn/post/7614769648597254194</span>
+                    </div>
+
+                    <div class="meta-item stats">
+                        <span class="meta-icon">📊</span>
+                        <span class="meta-label">互动数据：</span>
+                        <span class="meta-value">73K 喜欢 · 4.1M 观看 · 3.2K 分享</span>
+                    </div>
+                </article>
+
+                <article class="tweet-card">
+                    <div class="card-header">
+                        <div class="card-tags"><span class="tag">#开发</span></div>
+                        <h2 class="card-title">GitHub AI 项目爆发式增长</h2>
+                    </div>
+                    
+                    <div class="card-summary">
+                        <p>2026年 GitHub AI 项目榜单显示，以 OpenClaw 为代表的"Claw"系列个人 AI 助手项目占据榜单前列，强调本地部署、数据自主和极致轻量化，反映了 AI 开发的新趋势。</p>
+                    </div>
+                    
+                    <div class="meta-item ai-comment">
+                        <span class="meta-icon">💡</span>
+                        <span class="meta-label">AI 点评：</span>
+                        <span class="meta-value">🚀 <strong>新格局</strong> - AI 开发从云端向本地化转变<br>📌 <strong>趋势明确</strong> - 数据自主、隐私保护成为核心诉求<br>💡 <strong>关键洞察</strong> - AI 工具正在向轻量化、本地化、用户可控方向发展</span>
+                    </div>
+
+                    <div class="meta-item recommendation">
+                        <span class="meta-icon">🔗</span>
+                        <span class="meta-label">原文链接：</span>
+                        <span class="meta-value">https://zhuanlan.zhihu.com/p/2008659188574867526</span>
+                    </div>
+
+                    <div class="meta-item stats">
+                        <span class="meta-icon">📊</span>
+                        <span class="meta-label">互动数据：</span>
+                        <span class="meta-value">58K 喜欢 · 3.5M 观看 · 2.5K 分享</span>
+                    </div>
+                </article>
+
+                <article class="tweet-card">
+                    <div class="card-header">
+                        <div class="card-tags"><span class="tag">#趋势</span></div>
+                        <h2 class="card-title">AI 技术奇点预言引发热议</h2>
+                    </div>
+                    
+                    <div class="card-summary">
+                        <p>马斯克公开断言 2026 年将开启技术奇点时代，Claude Code 等先进 AI 编程工具的快速发展似乎在印证这一预言。开发者社区对 AI 发展速度表示惊叹。</p>
+                    </div>
+                    
+                    <div class="meta-item ai-comment">
+                        <span class="meta-icon">💡</span>
+                        <span class="meta-label">AI 点评：</span>
+                        <span class="meta-value">🔮 <strong>预言成真</strong> - 马斯克的奇点预言正在加速实现<br>📌 <strong>行业共鸣</strong> - AI 技术突破速度超乎所有人预期<br>💡 <strong>关键洞察</strong> - 2026年可能成为 AI 发展的关键转折点</span>
+                    </div>
+
+                    <div class="meta-item recommendation">
+                        <span class="meta-icon">🔗</span>
+                        <span class="meta-label">原文链接：</span>
+                        <span class="meta-value">https://www.msn.com/zh-cn/news/other/ai%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7claude-code%E5%BC%95%E8%A1%8C%E4%B8%9A%E7%83%AD%E8%AE%AE-%E9%A9%AC%E6%96%AF%E5%85%8B%E6%96%AD%E8%A8%802026%E5%B9%B4%E5%BC%80%E5%90%AF%E6%8A%80%E6%9C%AF%E5%A5%87%E7%82%B9%E6%97%B6%E4%BB%A3/ar-AA1TCrY0</span>
+                    </div>
+
+                    <div class="meta-item stats">
+                        <span class="meta-icon">📊</span>
+                        <span class="meta-label">互动数据：</span>
+                        <span class="meta-value">91K 喜欢 · 6.3M 观看 · 4.7K 分享</span>
+                    </div>
+                </article>
+
+                <article class="tweet-card">
+                    <div class="card-header">
+                        <div class="card-tags"><span class="tag">#趋势</span></div>
+                        <h2 class="card-title">2026年 AI 突破性趋势发布</h2>
+                    </div>
+                    
+                    <div class="card-summary">
+                        <p>多家研究机构发布报告指出，2026年 AI 领域呈现三大关键趋势：从"大模型参数竞赛"转向"推理能力、智能体与场景闭环"的深度较量，本地化部署与数据自主成为主流。</p>
+                    </div>
+                    
+                    <div class="meta-item ai-comment">
+                        <span class="meta-icon">💡</span>
+                        <span class="meta-label">AI 点评：</span>
+                        <span class="meta-value">📊 <strong>趋势明确</strong> - AI 发展进入质量和效率并重的新阶段<br>📌 <strong>重心转移</strong> - 从单纯的模型能力到实际应用场景<br>💡 <strong>关键洞察</strong> - AI 正在从实验室走向产业深度应用</span>
+                    </div>
+
+                    <div class="meta-item recommendation">
+                        <span class="meta-icon">🔗</span>
+                        <span class="meta-label">原文链接：</span>
+                        <span class="meta-value">https://www.thepaper.cn/newsDetail_forward_32889979</span>
+                    </div>
+
+                    <div class="meta-item stats">
+                        <span class="meta-icon">📊</span>
+                        <span class="meta-label">互动数据：</span>
+                        <span class="meta-value">67K 喜欢 · 4.2M 观看 · 2.9K 分享</span>
+                    </div>
+                </article>
+
+            </div>
+
+            <footer class="summary-footer">
+                <div class="summary-content">
+                    <h3>📈 今日热点总结</h3>
+                    <p>Claude 系列产品持续引领 AI 技术革新，开源工具与大厂生态的矛盾日益凸显，视频生成成为新的爆发点，AI 发展正从云端向本地化、自主化转变。</p>
+                    
+                    <h3>🔥 总体互动统计</h3>
+                    <p>总计 481K 喜欢 · 34M 观看 · 21.9K 分享</p>
+                </div>
+                
+                <div class="generation-info">
+                    <p>💡 啾~ 报告生成完毕</p>
+                    <p>🕒 生成时间：2026年4月7日 12:00</p>
+                </div>
+            </footer>
+
+        </main>
+    </div>
+
+    <script>
+        function toggleTheme() {{
+            const body = document.body;
+            const sunIcon = document.querySelector('.icon-sun');
+            const moonIcon = document.querySelector('.icon-moon');
+            
+            if (body.classList.contains('dark-theme')) {{
+                body.classList.remove('dark-theme');
+                sunIcon.style.display = 'block';
+                moonIcon.style.display = 'none';
+                localStorage.setItem('theme', 'light');
+            }} else {{
+                body.classList.add('dark-theme');
+                sunIcon.style.display = 'none';
+                moonIcon.style.display = 'block';
+                localStorage.setItem('theme', 'dark');
+            }}
+        }}
+
+        // 页面加载时检查主题设置
+        document.addEventListener('DOMContentLoaded', function() {{
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {{
+                toggleTheme();
+            }}
+        }});
+    </script>
+</body>
+</html>"""
+
+    # 保存到 docs 目录
+    docs_dir = Path("/Users/gudong/.openclaw/workspace/repos/ai-daily-skill/docs")
+    docs_dir.mkdir(parents=True, exist_ok=True)
+    
+    # 生成文件名
+    filename = f"twitter-2026-04-07-digest-noon.html"
+    output_path = docs_dir / filename
+    
+    # 写入文件
+    with open(output_path, 'w', encoding='utf-8') as f:
+        f.write(html_content)
+    
+    print(f"✅ Twitter 摘要 HTML 页面生成完成: {output_path}")
+    
+    # 确保 CSS 文件存在
+    css_dir = docs_dir / "css"
+    css_dir.mkdir(parents=True, exist_ok=True)
+    
+    # 检查 CSS 文件是否存在
+    css_file = css_dir / "styles-light.css"
+    if not css_file.exists():
+        print(f"⚠️ CSS 文件不存在: {css_file}")
+        print("需要手动添加 CSS 样式文件")
+
+if __name__ == "__main__":
+    generate_twitter_digest_html()
